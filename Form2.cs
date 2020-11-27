@@ -112,20 +112,27 @@ namespace HomeWork_7
 
         void CheckWin() 
         {
-            if (_NeedNum == _Num) 
-                if (MessageBox.Show($"Кол-во ходов: {_ComCount}!\nНачать новую игру?", "Вы победили!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    NewGame();
-                }
-                else
-                {
-                    Close();
-                }
+            if (_NeedNum != _Num) return;
+
+            int MinCount = GetMinActualCount();
+            string TextResult = _ComCount == MinCount ? "Вы угадали за минимальное кол-во ходов!" : $"Кол-во ходов: {_ComCount}, минимальное: {MinCount}.";
+
+            if (MessageBox.Show($"{TextResult}\nНачать новую игру?", "Вы победили!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                NewGame();
+            }
+            else
+            {
+                Close();
+            }
         }
 
         void NewGame()          //инициализация новой игры
         {
             _NeedNum = _rnd.Next(0, 100);
+            _ComCount = 0;
+            _Num = 0;
+            
             _stack.Clear();
 
             ChangeLblNum(0);
@@ -146,6 +153,31 @@ namespace HomeWork_7
             PrepBtn();
 
         }
+        
+        private int GetMinActualCount()
+        {
+            int Tmp = _NeedNum;
+            int result = 0;
+
+            while (Tmp != 0)
+            {
+                if (Tmp % 2 != 0)
+                {
+                    result++;
+                    Tmp -= 1;
+                }
+                else
+                {
+                    result++;
+                    Tmp /= 2;
+                }
+
+            }
+            return result;
+
+        }
+        
+        
     }
 
 
