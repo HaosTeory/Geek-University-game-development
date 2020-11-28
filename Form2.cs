@@ -77,9 +77,9 @@ namespace HomeWork_7
 
             _stack.Pop();
             if (_stack.Count != 0) 
-                i = _stack.Peek();      //удаляем и выозвращем верхний(последний) записанное число
+                i = _stack.Peek();      //удаляем и возвращем верхнее(последнее) записанное число
 
-            ChangeLblNum(i);            //изеняем это значение в метку
+            ChangeLblNum(i);            //изменяем это значение в метку
             ComCountEx(false);          //отнимаем 1 ход
             PrepBtn();
         }
