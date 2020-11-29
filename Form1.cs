@@ -294,6 +294,7 @@ namespace HomeWork_8
         public int group;
         public string city;
 
+        public Student() {}
         public Student(string fn, string ln, string u, string f, string d, int cr, int a, int g, string ct)
         {
             lastName = ln;
